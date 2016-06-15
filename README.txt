@@ -6,6 +6,8 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. Most
 
 !danica - Plays a Whale Sound
 
+Note: Config.json is not included, but there is an example. Get yourself a token!
+
 <one line to give the program's name and a brief idea of what it does.>
     Copyright (C) <year>  <name of author>
 
