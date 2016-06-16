@@ -12,4 +12,6 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. Most
 
 !teams - splits all users in the voice channels into two teams.
 
+!hoopla - yells HOOPLA!
+
 Note: Config.json is not included, but there is an example. Get yourself a token!

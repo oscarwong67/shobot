@@ -53,6 +53,15 @@ danica.on("message", function(message) {
 		}
 		danica.reply(message, "Team One is: " + teamOne + " and Team Two is: " + teamTwo);
 	}
+	else if (message.content.toUpperCase() === "!HOOPLA") {
+		danica.joinVoiceChannel(message.sender.voiceChannel, function(error, connection) {
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\hoopla.wav", function(error, intent) {
+				intent.on("end", function() {
+					danica.leaveVoiceChannel(message.sender.voiceChannel);
+				});
+			});
+		});
+	}
 });
 
 danica.loginWithToken(configFile.token);
