@@ -3,25 +3,25 @@ var configFile = require("./config.json");
 
 var danica = new Discord.Client();
 
-danica.on("ready", function() {
+danica.on("ready", function () {
 	danica.setStatus("online", "Whale Simulator");
 });
 
-danica.on("message", function(message) {	
+danica.on("message", function (message) {
 
 	if (message.content.toUpperCase() === "!DANICA") {
-		danica.joinVoiceChannel(message.sender.voiceChannel, function(error, connection) {
-		var random = Math.floor(Math.random() * 3 + 1);
+		danica.joinVoiceChannel(message.sender.voiceChannel, function (error, connection) {
+			var random = Math.floor(Math.random() * 3 + 1);
 
 			//change this directory, obviously
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\whale" + random + ".wav", function(error, intent) {
-				intent.on("end", function() {
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\whale" + random + ".wav", function (error, intent) {
+				intent.on("end", function () {
 					danica.leaveVoiceChannel(message.sender.voiceChannel);
 				});
 			});
 		});
 	}
-	else if (message.content.toUpperCase() === "!COINTOSS" || message.content.toUpperCase() === "!COINFLIP" ) {
+	else if (message.content.toUpperCase() === "!COINTOSS" || message.content.toUpperCase() === "!COINFLIP") {
 		var flip = Math.floor(Math.random() * 2 + 1);
 		if (flip === 1)
 			danica.reply(message, "tails!");
@@ -39,9 +39,9 @@ danica.on("message", function(message) {
 		var x = 1;
 
 		while (numbers.length < players.length) {
-			var randomNum = Math.floor(Math.random() * (players.length) );
+			var randomNum = Math.floor(Math.random() * (players.length));
 			if (numbers.indexOf(randomNum) === -1) {
-				numbers.push(randomNum);				
+				numbers.push(randomNum);
 			}
 		}
 		while (teamOne.length < (players.length / 2)) {
@@ -54,9 +54,9 @@ danica.on("message", function(message) {
 		danica.reply(message, "Team One is: " + teamOne + " and Team Two is: " + teamTwo);
 	}
 	else if (message.content.toUpperCase() === "!HOOPLA") {
-		danica.joinVoiceChannel(message.sender.voiceChannel, function(error, connection) {
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\hoopla.wav", function(error, intent) {
-				intent.on("end", function() {
+		danica.joinVoiceChannel(message.sender.voiceChannel, function (error, connection) {
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\hoopla.wav", function (error, intent) {
+				intent.on("end", function () {
 					danica.leaveVoiceChannel(message.sender.voiceChannel);
 				});
 			});
