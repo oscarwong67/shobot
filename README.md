@@ -14,4 +14,8 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. The 
 
 !hoopla - yells HOOPLA!
 
+!quotes or !quote - Provides a random famous quote.
+
+!ud (word) - looks up the Urban Dictonary definition of a word.
+
 Note: Config.json is not included, but there is an example. Get yourself a token!

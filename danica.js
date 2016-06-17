@@ -91,6 +91,9 @@ danica.on("message", function (message) {
 			success: function (data) {
 				var response = data.quote + " -" + data.author;
 				danica.reply(message, response);
+			},
+			error: function(err) {
+				danica.reply(message, "error.");
 			}
 		});
 	}
