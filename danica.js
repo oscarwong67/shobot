@@ -1,7 +1,8 @@
 var Discord = require("discord.js");
 var configFile = require("./config.json");
-
+var najax = $ = require('najax');
 var danica = new Discord.Client();
+var key = configFile["mashape-key"];
 
 danica.on("ready", function () {
 	danica.setStatus("online", "Whale Simulator");
@@ -65,10 +66,6 @@ danica.on("message", function (message) {
 	else if (message.content.toUpperCase().substring(0, 3) === "!UD") {
 		var word = message.content.substring(4);
 
-		var najax = $ = require('najax');
-		var configFile = require("./config.json");
-		var key = configFile["ud-key"];
-
 		$.get({
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader("X-Mashape-Authorization", key);
@@ -83,7 +80,20 @@ danica.on("message", function (message) {
 				danica.reply(message, "No results found.")
 			}
 		});
-	} 
+	}
+	else if (message.content.toUpperCase() === "!QUOTE" || message.content.toUpperCase() === "!QUOTES") {
+		$.get({
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("X-Mashape-Authorization", "dv3Bof2fUcmshEWEVIxDJt8sLwbvp1VsjLIjsnozZaFq1avizw");
+			},
+			url: "https://andruxnet-random-famous-quotes.p.mashape.com/",
+			dataType: 'json',
+			success: function (data) {
+				var response = data.quote + " -" + data.author;
+				danica.reply(message, response);
+			}
+		});
+	}
 });
 
 danica.loginWithToken(configFile.token);
