@@ -62,6 +62,28 @@ danica.on("message", function (message) {
 			});
 		});
 	}
+	else if (message.content.toUpperCase().substring(0, 3) === "!UD") {
+		var word = message.content.substring(4);
+
+		var najax = $ = require('najax');
+		var configFile = require("./config.json");
+		var key = configFile["ud-key"];
+
+		$.get({
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader("X-Mashape-Authorization", key);
+			},
+			url: 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' + word,
+			dataType: 'json',
+			success: function (data) {
+				var response = data.list[0].word + ": " + data.list[0].definition;
+				danica.reply(message, response);
+			},
+			error: function (err) {
+				danica.reply(message, "No results found.")
+			}
+		});
+	} 
 });
 
 danica.loginWithToken(configFile.token);
