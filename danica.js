@@ -63,6 +63,15 @@ danica.on("message", function (message) {
 			});
 		});
 	}
+	else if (message.content.toUpperCase() === "!NO") {
+  	danica.joinVoiceChannel(message.sender.voiceChannel, function (error, connection) {
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\noway.wav", function (error, intent) {
+				intent.on("end", function () {
+					danica.leaveVoiceChannel(message.sender.voiceChannel);
+				});
+			});
+		});
+	}
 	else if (message.content.toUpperCase().substring(0, 3) === "!UD") {
 		var word = message.content.substring(4);
 

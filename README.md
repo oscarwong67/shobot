@@ -18,4 +18,6 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. The 
 
 !ud (word) - looks up the Urban Dictonary definition of a word.
 
+!no - NO WAY, NO HOW
+
 Note: Config.json is not included, but there is an example. Get yourself a token!
