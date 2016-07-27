@@ -2,7 +2,7 @@
 
 A Discord Bot
 
-Get it here: https://discordapp.com/api/oauth2/authorize?&client_id=192731877348474881&scope=bot&permissions=268561430192731877348474881
+Installation: Download, make sure you have node.js installed, and head to the commmand line. Then, navigate to the folder (danica-bot-master) using the cd command, and type "node danica.js" (no quotes, obviously).
 
 Danica-Bot is a bot for Discord, which allows the use of various functions. The commands are:
 
