@@ -46,38 +46,56 @@ danica.on("message", function (message) {
 			message.reply("heads!");
 		}
 	}
-	else if (message.content.toUpperCase() === "!TEAMS") {
+		else if (message.content.toUpperCase() === "!TEAMS") {
+			var playerUsers = message.member.voiceChannel.members.array();
+			var players = [];
+			playerUsers = playerUsers.map(function (value, index) {
+				players.push(value.user.username);
+			});
+			console.log(players);			
+			var teamOne = [];
+			var teamTwo = [];
 
-		var players = message.member.voiceChannel.members;
-		var teamOne = [];
-		var teamTwo = [];
-		var teamOneSize = (players.length / 2) - 1;
-		var teamTwoPlayerOne = teamOneSize + 1;
-		var numbers = [];
-		var i = 0;
-		var x = 1;
-
-		while (numbers.length < players.length) {
-			var randomNum = Math.floor(Math.random() * (players.length));
-			if (numbers.indexOf(randomNum) === -1) {
-				numbers.push(randomNum);
+			if (playerUsers.length % 2 === 0) {
+				teamSize = players.length / 2;
 			}
-		}
-		while (teamOne.length < (players.length / 2)) {
-			teamOne.push(" " + players[numbers[i]].username);
-			if (players[numbers[x]] !== undefined)
-				teamTwo.push(" " + players[numbers[x]].username);
-			i += 2;
-			x += 2;
-		}
-		message.reply("Team One is: " + teamOne + " and Team Two is: " + teamTwo);
+			else {
+				var temp = players.length + 1;
+				teamSize = temp / 2;
+			}			
+			
+			var randomPlayerNumbers = [];
+			//each player in list is assigned a random number
+			while (randomPlayerNumbers.length < players.length) {
+				//get randomNum
+				var randomNum = Math.floor(Math.random() * (players.length));
+				if (randomPlayerNumbers.indexOf(randomNum) === -1) {
+					randomPlayerNumbers.push(randomNum);
+				}
+			}
+			
+			var teamOneCounter = 0;
+			var teamTwoCounter = 1;
+			//add players to team, using the array of random numbers as their indices, adding every second player two a team
+			//randomPlayerNumbers[teamOneCounter] means using the first number in the list of randoms as the index, then the second for team two, etc.
+			while (teamOne.length < (teamSize)) {
+				teamOne.push(" " + players[randomPlayerNumbers[teamOneCounter]]); //push first player according to random number list, then third, etc,
+				if (players[randomPlayerNumbers[teamTwoCounter]] !== undefined)
+					teamTwo.push(" " + players[randomPlayerNumbers[teamTwoCounter]]); //push second player, fourth, etc
+				else if (players[randomPlayerNumbers[teamTwoCounter]] === undefined)
+					teamTwo.push(" one more person (teams aren't even)");	//if teams are uneven
+				teamOneCounter += 2; //all players of even index, including zero
+				teamTwoCounter += 2;	//all players of odd index
+			}
+			console.log(teamOne);
+		message.reply("Team One is:" + teamOne + " and Team Two is:" + teamTwo);
 	}
 	else if (message.content.toUpperCase().substring(0, 3) === "!UD") {
 		var word = message.content.substring(4);
 
 		$.get({
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("X-Mashape-memberization", key);
+				xhr.setRequestHeader("X-Mashape-Authorization", key);
 			},
 			url: 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' + word,
 			dataType: 'json',
@@ -86,23 +104,25 @@ danica.on("message", function (message) {
 				message.reply(response);
 			},
 			error: function (err) {
-				message.reply("No results found.")
+				message.reply("No results found, or an error. I dunno.")
+				console.log(err);
 			}
 		});
 	}
 	else if (message.content.toUpperCase() === "!QUOTE" || message.content.toUpperCase() === "!QUOTES") {
 		$.get({
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("X-Mashape-memberization", "dv3Bof2fUcmshEWEVIxDJt8sLwbvp1VsjLIjsnozZaFq1avizw");
+				xhr.setRequestHeader("X-Mashape-Authorization", key);
 			},
 			url: "https://andruxnet-random-famous-quotes.p.mashape.com/",
 			dataType: 'json',
 			success: function (data) {
-				var response = data.quote + " -" + data.member;
+				var response = data.quote + " -" + data.author;
 				message.reply(response);
 			},
 			error: function (err) {
-				message.reply("error.");
+				message.reply("Sorry, there was an error.");
+				console.log(err);
 			}
 		});
 	}
