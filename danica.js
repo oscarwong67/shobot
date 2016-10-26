@@ -5,32 +5,50 @@ var danica = new Discord.Client();
 var key = configFile["mashape-key"];
 
 danica.on("ready", function () {
-	danica.setStatus("online", "Whale Simulator");
+	danica.user.setStatus("online", "Whale Simulator");
+	console.log("Danica Bot Online");
 });
 
 danica.on("message", function (message) {
-
-	if (message.content.toUpperCase() === "!DANICA") {
-		danica.joinVoiceChannel(message.sender.voiceChannel, function (error, connection) {
+	var channel = message.channel;
+		var voiceChannel = message.member.voiceChannel;
+		if (message.content.toUpperCase() === "!DANICA") {
+		voiceChannel.join().then(function (connection) {
 			var random = Math.floor(Math.random() * 3 + 1);
-
 			//change this directory, obviously
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\whale" + random + ".wav", function (error, intent) {
-				intent.on("end", function () {
-					danica.leaveVoiceChannel(message.sender.voiceChannel);
-				});
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\whale" + random + ".wav").on('end', function () {
+				connection.disconnect();
+			});
+		});
+	}
+	else if (message.content.toUpperCase() === "!HOOPLA") {
+		voiceChannel.join().then(function (connection) {
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\hoopla.wav").on('end', function () {
+				connection.disconnect();
+			});
+		});
+	}
+	else if (message.content.toUpperCase() === "!NO") {
+		voiceChannel.join().then(function (connection) {
+			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\noway.wav").on('end', function () {
+				connection.disconnect();
 			});
 		});
 	}
 	else if (message.content.toUpperCase() === "!COINTOSS" || message.content.toUpperCase() === "!COINFLIP") {
 		var flip = Math.floor(Math.random() * 2 + 1);
-		if (flip === 1)
-			danica.reply(message, "tails!");
-		else
-			danica.reply(message, "heads!");
+		if (flip === 1) {
+			console.log("Tails");
+			message.reply("tails!");
+		}
+		else {
+			console.log("Heads");
+			message.reply("heads!");
+		}
 	}
 	else if (message.content.toUpperCase() === "!TEAMS") {
-		var players = message.sender.voiceChannel.members;
+
+		var players = message.member.voiceChannel.members;
 		var teamOne = [];
 		var teamTwo = [];
 		var teamOneSize = (players.length / 2) - 1;
@@ -52,60 +70,42 @@ danica.on("message", function (message) {
 			i += 2;
 			x += 2;
 		}
-		danica.reply(message, "Team One is: " + teamOne + " and Team Two is: " + teamTwo);
-	}
-	else if (message.content.toUpperCase() === "!HOOPLA") {
-		danica.joinVoiceChannel(message.sender.voiceChannel, function (error, connection) {
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\hoopla.wav", function (error, intent) {
-				intent.on("end", function () {
-					danica.leaveVoiceChannel(message.sender.voiceChannel);
-				});
-			});
-		});
-	}
-	else if (message.content.toUpperCase() === "!NO") {
-  	danica.joinVoiceChannel(message.sender.voiceChannel, function (error, connection) {
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\noway.wav", function (error, intent) {
-				intent.on("end", function () {
-					danica.leaveVoiceChannel(message.sender.voiceChannel);
-				});
-			});
-		});
+		message.reply("Team One is: " + teamOne + " and Team Two is: " + teamTwo);
 	}
 	else if (message.content.toUpperCase().substring(0, 3) === "!UD") {
 		var word = message.content.substring(4);
 
 		$.get({
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("X-Mashape-Authorization", key);
+				xhr.setRequestHeader("X-Mashape-memberization", key);
 			},
 			url: 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' + word,
 			dataType: 'json',
 			success: function (data) {
 				var response = data.list[0].word + ": " + data.list[0].definition;
-				danica.reply(message, response);
+				message.reply(response);
 			},
 			error: function (err) {
-				danica.reply(message, "No results found.")
+				message.reply("No results found.")
 			}
 		});
 	}
 	else if (message.content.toUpperCase() === "!QUOTE" || message.content.toUpperCase() === "!QUOTES") {
 		$.get({
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("X-Mashape-Authorization", "dv3Bof2fUcmshEWEVIxDJt8sLwbvp1VsjLIjsnozZaFq1avizw");
+				xhr.setRequestHeader("X-Mashape-memberization", "dv3Bof2fUcmshEWEVIxDJt8sLwbvp1VsjLIjsnozZaFq1avizw");
 			},
 			url: "https://andruxnet-random-famous-quotes.p.mashape.com/",
 			dataType: 'json',
 			success: function (data) {
-				var response = data.quote + " -" + data.author;
-				danica.reply(message, response);
+				var response = data.quote + " -" + data.member;
+				message.reply(response);
 			},
-			error: function(err) {
-				danica.reply(message, "error.");
+			error: function (err) {
+				message.reply("error.");
 			}
 		});
 	}
 });
 
-danica.loginWithToken(configFile.token);
+danica.login(configFile.token);
