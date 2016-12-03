@@ -21,3 +21,4 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. The 
 !no - NO WAY, NO HOW
 
 Note: Config.json is not included, but there is an example. Get yourself a token!
+(also requires the najax npm package: https://www.npmjs.com/package/najax)
