@@ -23,3 +23,4 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. The 
 
 Note: Config.json is not included, but there is an example. Get yourself a token!
 -Use npm install to install required dependencies (najax, discord.js)
+-Get an API key for the config file from: http://docs.mashape.com/api-keys
