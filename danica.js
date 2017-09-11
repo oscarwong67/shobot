@@ -10,6 +10,7 @@ danica.on("ready", function () {
 	console.log("Danica Bot Online");
 });
 
+//todo: update to es6 code, handle promise rejections, help command
 danica.on("message", function (message) {
 	var channel = message.channel;
 	var voiceChannel = message.member.voiceChannel;
