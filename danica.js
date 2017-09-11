@@ -3,6 +3,7 @@ var configFile = require("./config.json");
 var najax = $ = require('najax');
 var danica = new Discord.Client();
 var key = configFile["mashape-key"];
+var audioPath = configFile["audio-path"];
 
 danica.on("ready", function () {
 	danica.user.setStatus("online", "Whale Simulator");
@@ -11,26 +12,26 @@ danica.on("ready", function () {
 
 danica.on("message", function (message) {
 	var channel = message.channel;
-		var voiceChannel = message.member.voiceChannel;
-		if (message.content.toUpperCase() === "!DANICA") {
+	var voiceChannel = message.member.voiceChannel;
+	if (message.content.toUpperCase() === "!DANICA") {
 		voiceChannel.join().then(function (connection) {
 			var random = Math.floor(Math.random() * 3 + 1);
 			//change this directory, obviously
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\whale" + random + ".wav").on('end', function () {
+			connection.playFile(audioPath + random + ".wav").on('end', function () {
 				connection.disconnect();
 			});
 		});
 	}
 	else if (message.content.toUpperCase() === "!HOOPLA") {
 		voiceChannel.join().then(function (connection) {
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\hoopla.wav").on('end', function () {
+			connection.playFile(audioPath + "hoopla.wav").on('end', function () {
 				connection.disconnect();
 			});
 		});
 	}
 	else if (message.content.toUpperCase() === "!NO") {
 		voiceChannel.join().then(function (connection) {
-			connection.playFile("E:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\noway.wav").on('end', function () {
+			connection.playFile(audioPath + "noway.wav").on('end', function () {
 				connection.disconnect();
 			});
 		});
