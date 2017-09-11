@@ -10,7 +10,7 @@ danica.on("ready", function () {
 	console.log("Danica Bot Online");
 });
 
-//todo: update to es6 code, handle promise rejections, help command
+//todo: update to es6 code, add a help command
 danica.on("message", function (message) {
 	var channel = message.channel;
 	var voiceChannel = message.member.voiceChannel;
@@ -18,7 +18,7 @@ danica.on("message", function (message) {
 		voiceChannel.join().then(function (connection) {
 			var random = Math.floor(Math.random() * 3 + 1);
 			//change this directory, obviously
-			connection.playFile(audioPath + random + ".wav").on('end', function () {
+			connection.playFile(audioPath + "whale" + random + ".wav").on('end', function () {
 				connection.disconnect();
 			});
 		});
