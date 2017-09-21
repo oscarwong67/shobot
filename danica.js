@@ -22,6 +22,10 @@ danica.on("message", function (message) {
 				connection.disconnect();
 			});
 		});
+		voiceChannel.join().catch(function(error) {
+			message.reply("oops, error");
+			console.log(error);
+		})
 	}
 	else if (message.content.toUpperCase() === "!HOOPLA") {
 		voiceChannel.join().then(function (connection) {
@@ -29,6 +33,9 @@ danica.on("message", function (message) {
 				connection.disconnect();
 			});
 		});
+		voiceChannel.join().catch(function(error) {
+			message.reply("oops, error");
+		})
 	}
 	else if (message.content.toUpperCase() === "!NO") {
 		voiceChannel.join().then(function (connection) {
@@ -36,6 +43,9 @@ danica.on("message", function (message) {
 				connection.disconnect();
 			});
 		});
+		voiceChannel.join().catch(function(error) {
+			message.reply("oops, error");
+		})
 	}
 	else if (message.content.toUpperCase() === "!COINTOSS" || message.content.toUpperCase() === "!COINFLIP") {
 		var flip = Math.floor(Math.random() * 2 + 1);
