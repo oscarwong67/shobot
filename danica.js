@@ -4,13 +4,14 @@ var najax = $ = require('najax');
 var danica = new Discord.Client();
 var key = configFile["mashape-key"];
 var audioPath = configFile["audio-path"];
+var noFortnite = configFile["user-that-cant-say-fortnite"]
 
 danica.on("ready", function () {
 	danica.user.setStatus("online", "Whale Simulator");
 	console.log("Danica Bot Online");
 });
 
-//todo: update to es6 code, add a help command
+//todo: update to es6 code, add a help command, add a define a word command
 danica.on("message", function (message) {
 	var channel = message.channel;
 	var voiceChannel = message.member.voiceChannel;
@@ -58,48 +59,48 @@ danica.on("message", function (message) {
 			message.reply("heads!");
 		}
 	}
-		else if (message.content.toUpperCase() === "!TEAMS") {
-			var playerUsers = message.member.voiceChannel.members.array();
-			var players = [];
-			playerUsers = playerUsers.map(function (value, index) {
-				players.push(value.user.username);
-			});
-			console.log(players);			
-			var teamOne = [];
-			var teamTwo = [];
+	else if (message.content.toUpperCase() === "!TEAMS") {
+		var playerUsers = message.member.voiceChannel.members.array();
+		var players = [];
+		playerUsers = playerUsers.map(function (value, index) {
+			players.push(value.user.username);
+		});
+		console.log(players);
+		var teamOne = [];
+		var teamTwo = [];
 
-			if (playerUsers.length % 2 === 0) {
-				teamSize = players.length / 2;
+		if (playerUsers.length % 2 === 0) {
+			teamSize = players.length / 2;
+		}
+		else {
+			var temp = players.length + 1;
+			teamSize = temp / 2;
+		}
+
+		var randomPlayerNumbers = [];
+		//each player in list is assigned a random number
+		while (randomPlayerNumbers.length < players.length) {
+			//get randomNum
+			var randomNum = Math.floor(Math.random() * (players.length));
+			if (randomPlayerNumbers.indexOf(randomNum) === -1) {
+				randomPlayerNumbers.push(randomNum);
 			}
-			else {
-				var temp = players.length + 1;
-				teamSize = temp / 2;
-			}			
-			
-			var randomPlayerNumbers = [];
-			//each player in list is assigned a random number
-			while (randomPlayerNumbers.length < players.length) {
-				//get randomNum
-				var randomNum = Math.floor(Math.random() * (players.length));
-				if (randomPlayerNumbers.indexOf(randomNum) === -1) {
-					randomPlayerNumbers.push(randomNum);
-				}
-			}
-			
-			var teamOneCounter = 0;
-			var teamTwoCounter = 1;
-			//add players to team, using the array of random numbers as their indices, adding every second player two a team
-			//randomPlayerNumbers[teamOneCounter] means using the first number in the list of randoms as the index, then the second for team two, etc.
-			while (teamOne.length < (teamSize)) {
-				teamOne.push(" " + players[randomPlayerNumbers[teamOneCounter]]); //push first player according to random number list, then third, etc,
-				if (players[randomPlayerNumbers[teamTwoCounter]] !== undefined)
-					teamTwo.push(" " + players[randomPlayerNumbers[teamTwoCounter]]); //push second player, fourth, etc
-				else if (players[randomPlayerNumbers[teamTwoCounter]] === undefined)
-					teamTwo.push(" one more person (teams aren't even)");	//if teams are uneven
-				teamOneCounter += 2; //all players of even index, including zero
-				teamTwoCounter += 2;	//all players of odd index
-			}
-			console.log(teamOne);
+		}
+
+		var teamOneCounter = 0;
+		var teamTwoCounter = 1;
+		//add players to team, using the array of random numbers as their indices, adding every second player two a team
+		//randomPlayerNumbers[teamOneCounter] means using the first number in the list of randoms as the index, then the second for team two, etc.
+		while (teamOne.length < (teamSize)) {
+			teamOne.push(" " + players[randomPlayerNumbers[teamOneCounter]]); //push first player according to random number list, then third, etc,
+			if (players[randomPlayerNumbers[teamTwoCounter]] !== undefined)
+				teamTwo.push(" " + players[randomPlayerNumbers[teamTwoCounter]]); //push second player, fourth, etc
+			else if (players[randomPlayerNumbers[teamTwoCounter]] === undefined)
+				teamTwo.push(" one more person (teams aren't even)");	//if teams are uneven
+			teamOneCounter += 2; //all players of even index, including zero
+			teamTwoCounter += 2;	//all players of odd index
+		}
+		console.log(teamOne);
 		message.reply("Team One is:" + teamOne + " and Team Two is:" + teamTwo);
 	}
 	else if (message.content.toUpperCase().substring(0, 3) === "!UD") {
@@ -137,6 +138,10 @@ danica.on("message", function (message) {
 				console.log(err);
 			}
 		});
+	}
+	//feature put in to troll one of my friends	
+	else if (message.content.toUpperCase().includes("FORTNITE") && message.author.tag == noFortnite) {
+		message.delete();
 	}
 });
 
