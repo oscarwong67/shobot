@@ -14,18 +14,20 @@ Note: Config.json is not included, but there is an example.
 
 Danica-Bot is a bot for Discord, which allows the use of various functions. The commands are:
 
-!danica - Plays a Whale Sound
+* !danica - Plays a Whale Sound
 
-!cointoss or !coinflip - Tosses a coin, heads or tails.
+* !hoopla - yells HOOPLA!
 
-!teams - splits all users in the voice channels into two teams.
+* !no - NO WAY, NO HOW
 
-!hoopla - yells HOOPLA!
+* !cointoss or !coinflip - Tosses a coin, heads or tails.
 
-!quotes or !quote - Provides a random famous quote.
+* !teams - splits all users in the voice channels into two teams.
 
-!ud (word) - looks up the Urban Dictonary definition of a word.
+* !ud (word) - looks up the Urban Dictonary definition of a word or phrase
 
-!no - NO WAY, NO HOW
+* !quotes or !quote - Provides a random famous quote.
 
-Other features include the ability to prevent a certain player from using the word "Fortnite" in text servers, if you so choose (see Config).
+* !help - links back to this page.
+
+* There is also the ability to prevent a certain player from using the word "Fortnite" in text servers, if you so choose (see Config).
