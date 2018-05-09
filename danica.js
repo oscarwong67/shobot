@@ -117,6 +117,7 @@ danica.on("message", function (message) {
 			dataType: 'json',
 			success: function (data) {
 				var response = data.list[0].word + ": " + data.list[0].definition;
+				response = response.substr(0, 1).toUpperCase() + response.substr(1);
 				message.reply(response);
 			},
 			error: function (err) {
