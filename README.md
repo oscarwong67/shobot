@@ -10,6 +10,7 @@ Installation:
 
 Note: Config.json is not included, but there is an example. 
 * Get a token from http://discordapp.com/developers!
+* This will let you generate a redirect URI, which lets you add the bot to servers.
 * Get an API key for the config file from: http://docs.mashape.com/api-keys
 * Include the directory where your audio files are
 * You'll need to install FFMPEG and add it to the PATH (on windows)
