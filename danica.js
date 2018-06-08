@@ -4,15 +4,14 @@ var najax = $ = require('najax');
 var danica = new Discord.Client();
 var key = configFile["mashape-key"];
 var audioPath = configFile["audio-path"];
-var noFortnite = configFile["user-that-cant-say-fortnite"];
 
 //initialize the bot
-danica.on("ready", () => {
+danica.on("ready", function() {
 	danica.user.setStatus("online", "Whale Simulator");
 	console.log("Danica Bot Online");
 });
 
-//TODO:
+//handle commands
 danica.on("message", function (message) {
 	var channel = message.channel;
 	var voiceChannel = message.member.voiceChannel;
@@ -144,10 +143,7 @@ danica.on("message", function (message) {
 			}
 		});
 	}
-	//feature put in to troll one of my friends - if the specified user uses "fortnite" in a text channel message, it's deleted instantly
-	else if (message.content.toUpperCase().includes("FORTNITE") && message.author.tag == noFortnite) {
-		message.delete();
-	}
+	//get help
 	else if (message.content.toUpperCase() === "!HELP") {
 		message.reply("Visit https://github.com/oscarwong67/danica-bot for a list of commands.");
 	}

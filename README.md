@@ -29,5 +29,3 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. The 
 * !quotes or !quote - Provides a random famous quote.
 
 * !help - links back to this page.
-
-* There is also the ability to prevent a certain player from using the word "Fortnite" in text servers, if you so choose (see Config).
