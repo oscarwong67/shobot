@@ -4,10 +4,13 @@ A Discord Bot
 
 Installation:
 * Make sure you have node.js and ffmpeg installed and added to the PATH if you're on Windows.
-* Install all dependencies
+* Install all dependencies by running
+`npm install` while inside the project root.
+* To start the bot, run `node danica` while in the project root.
 
 Note: Config.json is not included, but there is an example. 
 * Get a token from http://discordapp.com/developers!
+* This will let you generate a redirect URI, which lets you add the bot to servers.
 * Get an API key for the config file from: http://docs.mashape.com/api-keys
 * Include the directory where your audio files are
 * You'll need to install FFMPEG and add it to the PATH (on windows)
