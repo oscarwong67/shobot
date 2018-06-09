@@ -1,1 +1,1 @@
-web: node danica
+worker: node danica
