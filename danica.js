@@ -7,7 +7,7 @@ var audioPath = configFile["audio-path"];
 
 //initialize the bot
 danica.on("ready", function() {
-	danica.user.setStatus("online", "Whale Simulator");
+	danica.user.setActivity("Whale Simulator", { type: "PLAYING" });
 	console.log("Danica Bot Online");
 });
 
