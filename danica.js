@@ -7,7 +7,7 @@ var audioPath = configFile["audio-path"];
 
 //initialize the bot
 danica.on("ready", function() {
-	danica.user.setStatus("online", "Whale Simulator");
+	danica.user.setActivity("Whale Simulator");
 	console.log("Danica Bot Online");
 });
 
@@ -17,10 +17,14 @@ danica.on("message", function (message) {
 	var voiceChannel = message.member.voiceChannel;
 	//handling each command
 	//first block, the sounds
+
+	//If the message.content has the toUpperCase() property, it means the content can be uppercase or lowercase but the === value
+	//must equal to the command in uppercase letters!
 	if (message.content.toUpperCase() === "!DANICA") {
 		voiceChannel.join().then(function (connection) {
 			var random = Math.floor(Math.random() * 3 + 1);
 			//change this directory, obviously
+			// fetch a random whale video from the pathway 1-3
 			connection.playFile(audioPath + "whale" + random + ".wav").on('end', function () {
 				connection.disconnect();
 			});
