@@ -3,7 +3,6 @@ var configFile = require("./config.json");
 var najax = $ = require('najax');
 var danica = new Discord.Client();
 var key = configFile["rapidapi-key"];
-var audioPath = configFile["audio-path"];
 
 //initialize the bot
 danica.on("ready", function() {
@@ -30,7 +29,7 @@ danica.on("message", function (message) {
 			var random = Math.floor(Math.random() * 3 + 1);
 			//change this directory, obviously
 			// fetch a random whale video from the pathway 1-3
-			connection.playFile(audioPath + "whale" + random + ".wav").on('end', function () {
+			connection.play(`./audio/whale${random}.wav`).on('end', function () {
 				connection.disconnect();
 			});
 		});
@@ -41,7 +40,7 @@ danica.on("message", function (message) {
 	}
 	else if (message.content.toUpperCase() === "!HOOPLA") {
 		voiceChannel.join().then(function (connection) {
-			connection.playFile(audioPath + "hoopla.wav").on('end', function () {
+			connection.play(`./audio/hoopla.wav`).on('end', function () {
 				connection.disconnect();
 			});
 		});
@@ -51,7 +50,7 @@ danica.on("message", function (message) {
 	}
 	else if (message.content.toUpperCase() === "!NO") {
 		voiceChannel.join().then(function (connection) {
-			connection.playFile(audioPath + "noway.wav").on('end', function () {
+			connection.play(`./audio/noway.wav`).on('end', function () {
 				connection.disconnect();
 			});
 		});
