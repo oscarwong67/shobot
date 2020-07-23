@@ -11,7 +11,7 @@ Installation:
 Note: Config.json is not included, but there is an example. 
 * Get a token from http://discordapp.com/developers!
 * This will let you generate a redirect URI, which lets you add the bot to servers.
-* Get an API key for the config file from: http://docs.mashape.com/api-keys
+* Get an API key for the config file from: https://rapidapi.com/
 * Include the directory where your audio files are
 * You'll need to install FFMPEG and add it to the PATH (on windows)
 
@@ -29,6 +29,4 @@ Danica-Bot is a bot for Discord, which allows the use of various functions. The 
 
 * !ud (word) - looks up the Urban Dictonary definition of a word or phrase
 
-* !quotes or !quote - Provides a random famous quote.
-
-* !help - links back to this page.
+* d!help - links back to this page.

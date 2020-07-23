@@ -2,13 +2,18 @@ var Discord = require("discord.js");
 var configFile = require("./config.json");
 var najax = $ = require('najax');
 var danica = new Discord.Client();
-var key = configFile["mashape-key"];
+var key = configFile["rapidapi-key"];
 var audioPath = configFile["audio-path"];
 
 //initialize the bot
 danica.on("ready", function() {
-	danica.user.setActivity("Whale Simulator");
-	console.log("Danica Bot Online");
+	danica.user.setPresence({
+		game: {
+			name: 'Use d!help',
+			type: "Playing",
+			url: "https://oscarwong.me"
+		}
+	});
 });
 
 //handle commands
@@ -114,9 +119,11 @@ danica.on("message", function (message) {
 		var word = message.content.substring(4);
 		$.get({
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader("X-Mashape-Authorization", key);	//authenticate
+				xhr.setRequestHeader("x-rapidapi-key", key);	//authenticate
+				xhr.setRequestHeader("x-rapidapi-host", "mashape-community-urban-dictionary.p.rapidapi.com");
+				xhr.setRequestHeader("useQueryString", true);
 			},
-			url: 'https://mashape-community-urban-dictionary.p.mashape.com/define?term=' + word,
+			url: 'https://mashape-community-urban-dictionary.p.rapidapi.com/define?term=' + word,
 			dataType: 'json',
 			success: function (data) {
 				var response = data.list[0].word + ": " + data.list[0].definition;
@@ -124,31 +131,13 @@ danica.on("message", function (message) {
 				message.reply(response);
 			},
 			error: function (err) {
-				message.reply("No results found for " + word + " , or an error. I dunno.")
-				console.log(err);
-			}
-		});
-	}
-	//generate a random quote
-	else if (message.content.toUpperCase() === "!QUOTE" || message.content.toUpperCase() === "!QUOTES") {
-		$.get({
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader("X-Mashape-Authorization", key);
-			},
-			url: "https://andruxnet-random-famous-quotes.p.mashape.com/",
-			dataType: 'json',
-			success: function (data) {
-				var response = data.quote + " -" + data.author;
-				message.reply(response);
-			},
-			error: function (err) {
-				message.reply("No results found, or an error. I dunno.")
+				message.reply("No results found for " + word + ", or an error. I dunno.")
 				console.log(err);
 			}
 		});
 	}
 	//get help
-	else if (message.content.toUpperCase() === "!HELP") {
+	else if (message.content.toUpperCase() === "D!HELP") {
 		message.reply("Visit https://github.com/oscarwong67/danica-bot for a list of commands.");
 	}
 });

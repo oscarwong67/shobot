@@ -1,5 +1,5 @@
 {
 	"token": "this is where your discord bot token goes",
 	"audio-path": "C:\\Users\\Oscar\\Coding\\Github\\danica-bot\\audio\\",
-	"mashape-key": "your mashape api key"
+	"rapidapi-key": "your rapid api key"
 }
