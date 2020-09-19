@@ -1,4 +1,4 @@
-<Danica Bot - General Purpose Discord Bot>
+<Shobot - General Purpose Discord Bot>
     Copyright (C) <2016>  <Oscar Wong>
 
     This program is free software: you can redistribute it and/or modify

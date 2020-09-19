@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oscarwong67/danica-bot.git"
+    "url": "git+https://github.com/oscarwong67/shobot.git"
   },
   "author": "Oscar Wong",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/oscarwong67/danica-bot/issues"
+    "url": "https://github.com/oscarwong67/shobot/issues"
   },
-  "homepage": "https://github.com/oscarwong67/danica-bot#readme"
+  "homepage": "https://github.com/oscarwong67/shobot#readme"
 }
