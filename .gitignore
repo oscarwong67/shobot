@@ -3,3 +3,4 @@ node_modules/
 .vscode/
 blue-whale.png
 ffmpeg
+.env

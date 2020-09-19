@@ -1,1 +1,1 @@
-worker: node danica
+worker: node dist/app
