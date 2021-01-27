@@ -84,7 +84,7 @@ export class Bot {
   private getSoundBiteMatch(messageContent: string): string {    
     let matchingSoundBite = null;
     for (const soundBite of this.soundBites.keys()) {
-      if (messageContent.includes(soundBite) && (!matchingSoundBite || soundBite.length > matchingSoundBite)) {
+      if (messageContent.includes(soundBite) && ((!matchingSoundBite) || soundBite.length > matchingSoundBite.length)) {
         matchingSoundBite = soundBite;
       }
     }
