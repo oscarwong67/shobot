@@ -82,12 +82,13 @@ export class Bot {
   }
 
   private getSoundBiteMatch(messageContent: string): string {    
+    let matchingSoundBite = null;
     for (const soundBite of this.soundBites.keys()) {
-      if (messageContent.includes(soundBite)) {
-        return soundBite;
+      if (messageContent.includes(soundBite) && (!matchingSoundBite || soundBite.length > matchingSoundBite)) {
+        matchingSoundBite = soundBite;
       }
     }
-    return null;
+    return matchingSoundBite;
   }
 
   private async playAudioFile(
